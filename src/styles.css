@@ -1,0 +1,149 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-indigo-glow: var(--indigo-glow);
+  --color-success: var(--success);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Midnight Indigo system */
+  --background: #050505;
+  --foreground: #ffffff;
+  --surface: #0f1117;
+  --surface-2: #161a22;
+  --text-secondary: #b6bed1;
+  --text-muted: #7c8599;
+  --indigo-glow: #818cf8;
+  --success: #22c55e;
+
+  --card: #0f1117;
+  --card-foreground: #ffffff;
+  --popover: #0f1117;
+  --popover-foreground: #ffffff;
+  --primary: #6d72f6;
+  --primary-foreground: #ffffff;
+  --secondary: #161a22;
+  --secondary-foreground: #ffffff;
+  --muted: #161a22;
+  --muted-foreground: #7c8599;
+  --accent: #818cf8;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #6d72f6;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(109, 114, 246, 0.35);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background-color: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .glass-hover {
+    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 300ms ease, transform 300ms ease;
+  }
+  .glass-hover:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(129, 140, 248, 0.35);
+    box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.15), 0 20px 60px -20px rgba(109, 114, 246, 0.35);
+  }
+  .label-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+  .radial-indigo {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(109, 114, 246, 0.18), transparent 70%);
+  }
+  .radial-indigo-center {
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(109, 114, 246, 0.22), transparent 70%);
+  }
+  .hairline {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    height: 1px;
+  }
+  .fade-edge-b {
+    mask-image: linear-gradient(180deg, #000 60%, transparent);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .text-secondary { color: var(--color-text-secondary); }
+  .text-muted-2 { color: var(--color-text-muted); }
+
+  @keyframes float-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .animate-float-soft { animation: float-soft 8s ease-in-out infinite; }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up { animation: fade-up 700ms ease-out both; }
+}
