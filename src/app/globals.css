@@ -350,7 +350,12 @@ body {
 }
 
 .gradient-text-on-blue {
-  background: linear-gradient(90deg, #ffffff 0%, #fde68a 100%);
+  background: linear-gradient(
+    90deg,
+    #fde047 0%,
+    #34d399 55%,
+    #10b981 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

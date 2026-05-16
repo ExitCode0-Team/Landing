@@ -54,8 +54,12 @@ export function LoopingHeadlinePiece() {
 
   return (
     <span
-      className="relative inline-flex items-baseline"
-      style={{ minWidth: "5.2ch", verticalAlign: "baseline" }}
+      className="relative inline-block align-baseline"
+      style={{
+        width: "5.5ch",
+        height: "1em",
+        verticalAlign: "baseline",
+      }}
       aria-live="polite"
       aria-atomic="true"
     >
@@ -63,10 +67,10 @@ export function LoopingHeadlinePiece() {
         {phase === "text" ? (
           <motion.span
             key="text"
-            className="inline-block align-baseline will-change-transform"
-            initial={{ x: 64, opacity: 0 }}
+            className="absolute bottom-0 left-0 inline-block will-change-transform"
+            initial={{ x: 48, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -64, opacity: 0 }}
+            exit={{ x: -48, opacity: 0 }}
             transition={{
               duration: TEXT_TRANSITION_MS / 1000,
               ease: EASE_KAIROS,
@@ -77,15 +81,14 @@ export function LoopingHeadlinePiece() {
         ) : (
           <motion.span
             key="typing"
-            className="inline-flex items-baseline align-baseline"
-            initial={{ opacity: 0, scale: 0.82 }}
+            className="absolute bottom-0 left-0 inline-flex"
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.88 }}
+            exit={{ opacity: 0, scale: 0.92 }}
             transition={{
               duration: TYPING_TRANSITION_MS / 1000,
               ease: EASE_KAIROS,
             }}
-            style={{ verticalAlign: "baseline" }}
           >
             <TypingBubble />
           </motion.span>
@@ -98,39 +101,24 @@ export function LoopingHeadlinePiece() {
 function TypingBubble() {
   return (
     <span
-      className="relative inline-flex items-center gap-[0.12em]"
+      className="inline-flex items-center gap-[3px] rounded-full px-[0.35em] py-[0.2em]"
       style={{
         background: "#DCF8C6",
-        borderRadius: "0.55em 0.55em 0.55em 0.18em",
-        padding: "0.32em 0.48em",
-        verticalAlign: "baseline",
-        transform: "translateY(-0.06em)",
+        lineHeight: 1,
       }}
       aria-label="Kairo is typing"
     >
       <span
         className="typing-dot rounded-full"
-        style={{
-          width: "0.2em",
-          height: "0.2em",
-          background: "#4b5563",
-        }}
+        style={{ width: "0.14em", height: "0.14em", background: "#4b5563" }}
       />
       <span
         className="typing-dot rounded-full"
-        style={{
-          width: "0.2em",
-          height: "0.2em",
-          background: "#4b5563",
-        }}
+        style={{ width: "0.14em", height: "0.14em", background: "#4b5563" }}
       />
       <span
         className="typing-dot rounded-full"
-        style={{
-          width: "0.2em",
-          height: "0.2em",
-          background: "#4b5563",
-        }}
+        style={{ width: "0.14em", height: "0.14em", background: "#4b5563" }}
       />
     </span>
   );
