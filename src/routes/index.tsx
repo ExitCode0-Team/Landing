@@ -378,7 +378,7 @@ const tickerNames = [
 function TrustTicker() {
   return (
     <section className="py-16 overflow-hidden">
-      <p className="label-eyebrow text-center">Trusted by teams at</p>
+      <p className="label-eyebrow text-center">Roles from top companies, matched to you daily</p>
       <div className="relative mt-6">
         <div
           className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10"
