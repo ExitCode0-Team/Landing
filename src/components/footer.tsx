@@ -29,7 +29,10 @@ const FOOTER_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-white">
+    <footer
+      className="bg-white"
+      style={{ marginTop: -40, paddingTop: 40 }}
+    >
       <div className="mx-auto w-full max-w-6xl px-6 py-16">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>

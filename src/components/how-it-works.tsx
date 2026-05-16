@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { SectionEdge } from "./section-edge";
 
 const EASE_KAIROS = [0.16, 1, 0.3, 1] as const;
 
@@ -48,8 +49,9 @@ export function HowItWorks() {
   const initial = prefersReducedMotion ? "visible" : "hidden";
 
   return (
-    <section id="how" className="relative border-t border-border bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 py-24 lg:py-32">
+    <section id="how" className="relative bg-white">
+      <SectionEdge from="#ffffff" to="#f3f4f6" />
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24 lg:py-32">
         <motion.div
           initial={initial}
           whileInView="visible"

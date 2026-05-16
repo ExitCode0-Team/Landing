@@ -3,6 +3,9 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { WhatsAppIcon } from "./logo";
+import { SectionEdge, sectionOverlap } from "./section-edge";
+
+const CTA_EDGE = 56;
 
 const EASE_KAIROS = [0.16, 1, 0.3, 1] as const;
 
@@ -20,7 +23,15 @@ export function CtaBanner() {
   const initial = prefersReducedMotion ? "visible" : "hidden";
 
   return (
-    <section id="cta" className="section-accent relative overflow-hidden">
+    <section
+      id="cta"
+      className="section-accent relative overflow-hidden"
+      style={{
+        marginTop: -sectionOverlap(CTA_EDGE),
+        paddingTop: sectionOverlap(CTA_EDGE),
+      }}
+    >
+      <SectionEdge from="#f59e0b" to="#ffffff" height={CTA_EDGE} />
       <div
         className="pointer-events-none absolute inset-0 opacity-20"
         style={{
@@ -29,7 +40,7 @@ export function CtaBanner() {
           backgroundSize: "22px 22px",
         }}
       />
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start gap-8 px-6 py-20 md:flex-row md:items-center md:justify-between md:py-24">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-start gap-8 px-6 py-20 md:flex-row md:items-center md:justify-between md:py-24">
         <motion.div
           initial={initial}
           whileInView="visible"

@@ -1,6 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { SectionEdge, sectionOverlap } from "./section-edge";
+
+const FEATURES_EDGE = 72;
 
 const EASE_KAIROS = [0.16, 1, 0.3, 1] as const;
 
@@ -117,8 +120,16 @@ export function Features() {
   const initial = prefersReducedMotion ? "visible" : "hidden";
 
   return (
-    <section id="features" className="section-muted border-t border-border">
-      <div className="mx-auto w-full max-w-6xl px-6 py-24 lg:py-32">
+    <section
+      id="features"
+      className="relative bg-[#f3f4f6]"
+      style={{
+        marginTop: -sectionOverlap(FEATURES_EDGE),
+        paddingTop: sectionOverlap(FEATURES_EDGE),
+      }}
+    >
+      <SectionEdge from="#f3f4f6" to="#111827" height={FEATURES_EDGE} />
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24 lg:py-32">
         <motion.div
           initial={initial}
           whileInView="visible"

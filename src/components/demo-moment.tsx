@@ -11,6 +11,9 @@ import {
   VideoCallIcon,
   WhatsAppIcon,
 } from "./logo";
+import { SectionEdge, sectionOverlap } from "./section-edge";
+
+const DEMO_EDGE = 64;
 
 const EASE_KAIROS = [0.16, 1, 0.3, 1] as const;
 
@@ -86,7 +89,15 @@ export function DemoMoment() {
   const initial = prefersReducedMotion ? "visible" : "hidden";
 
   return (
-    <section id="demo" className="section-dark relative overflow-hidden border-t-2 border-primary/40">
+    <section
+      id="demo"
+      className="section-dark relative overflow-hidden text-white"
+      style={{
+        marginTop: -sectionOverlap(DEMO_EDGE),
+        paddingTop: sectionOverlap(DEMO_EDGE),
+      }}
+    >
+      <SectionEdge from="#111827" to="#f59e0b" height={DEMO_EDGE} />
       <div
         className="pointer-events-none absolute -top-32 right-1/4 h-[420px] w-[600px] rounded-full opacity-30 blur-3xl"
         style={{
@@ -102,7 +113,7 @@ export function DemoMoment() {
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-24 lg:py-32">
+      <motion.div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <motion.div
             initial={initial}
@@ -208,7 +219,7 @@ export function DemoMoment() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -55,10 +55,13 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden border-b-4 border-primary-hover/60"
-      style={{ background: "var(--primary)" }}
+      className="relative overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(180deg, #3b82f6 0%, #3b82f6 78%, #93c5fd 92%, #dbeafe 97%, #ffffff 100%)",
+      }}
     >
-      <div className="dot-grid-light pointer-events-none absolute inset-0 opacity-70" />
+      <div className="dot-grid-light dot-grid-light-fade pointer-events-none absolute inset-0 opacity-70" aria-hidden />
       <div
         className="pointer-events-none absolute -top-32 left-1/2 h-[520px] w-[880px] -translate-x-1/2 rounded-full opacity-55 blur-3xl"
         style={{
@@ -164,6 +167,7 @@ export function Hero() {
           <MessagingPreview />
         </motion.div>
       </div>
+
     </section>
   );
 }
