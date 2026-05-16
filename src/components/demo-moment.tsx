@@ -5,7 +5,12 @@ import {
   useReducedMotion,
   type Variants,
 } from "framer-motion";
-import { WhatsAppIcon } from "./logo";
+import {
+  MoreVerticalIcon,
+  PhoneCallIcon,
+  VideoCallIcon,
+  WhatsAppIcon,
+} from "./logo";
 
 const EASE_KAIROS = [0.16, 1, 0.3, 1] as const;
 
@@ -149,15 +154,38 @@ export function DemoMoment() {
             <div className="absolute -inset-4 -z-10 rounded-[28px] bg-gradient-to-br from-primary/30 via-transparent to-accent/30 blur-2xl" />
             <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
               <div className="overflow-hidden rounded-xl border border-border bg-white">
-                <div className="flex items-center gap-3 bg-[#075E54] px-4 py-3 text-white">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-white">
-                    <WhatsAppIcon className="h-5 w-5" />
+                <div className="flex items-center gap-3 bg-[#075E54] px-5 py-4 text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-white">
+                    <WhatsAppIcon className="h-6 w-6" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-body-sm font-semibold leading-tight">
+                    <p className="text-h4 font-semibold leading-tight">
                       Kairo · Career agent
                     </p>
-                    <p className="text-[11px] opacity-80">typing…</p>
+                    <p className="text-[12px] opacity-85">typing…</p>
+                  </div>
+                  <div className="flex items-center gap-4 text-white/90">
+                    <button
+                      type="button"
+                      className="transition-colors hover:text-white"
+                      aria-label="Video call"
+                    >
+                      <VideoCallIcon className="h-5 w-5" />
+                    </button>
+                    <button
+                      type="button"
+                      className="transition-colors hover:text-white"
+                      aria-label="Voice call"
+                    >
+                      <PhoneCallIcon className="h-5 w-5" />
+                    </button>
+                    <button
+                      type="button"
+                      className="transition-colors hover:text-white"
+                      aria-label="More options"
+                    >
+                      <MoreVerticalIcon className="h-5 w-5" />
+                    </button>
                   </div>
                 </div>
 

@@ -8,6 +8,8 @@ const FEATURES = [
   {
     tint: "card-tint-primary",
     iconTone: "bg-primary text-white",
+    borderHover: "group-hover:border-primary/35",
+    glow: "rgba(59,130,246,0.35)",
     icon: BellIcon,
     title: "Instant WhatsApp alerts",
     body: "Match score, role, company, and time-since-posted in one line. No inbox digest you forget to open.",
@@ -15,6 +17,8 @@ const FEATURES = [
   {
     tint: "card-tint-secondary",
     iconTone: "bg-secondary text-white",
+    borderHover: "group-hover:border-secondary/35",
+    glow: "rgba(16,185,129,0.35)",
     icon: SparklesIcon,
     title: "AI-tailored CVs",
     body: "MiniMax rewrites your summary, experience, and skills for each role. RenderCV ships a clean PDF in ~60s.",
@@ -22,6 +26,8 @@ const FEATURES = [
   {
     tint: "card-tint-accent",
     iconTone: "bg-accent text-white",
+    borderHover: "group-hover:border-accent/35",
+    glow: "rgba(245,158,11,0.35)",
     icon: ChartIcon,
     title: "0–100 match score",
     body: "Every alert comes with structured reasons so you know why a role fits — and what to highlight in conversation.",
@@ -29,6 +35,8 @@ const FEATURES = [
   {
     tint: "card-tint-primary",
     iconTone: "bg-primary text-white",
+    borderHover: "group-hover:border-primary/35",
+    glow: "rgba(59,130,246,0.35)",
     icon: BoltIcon,
     title: "Realtime dashboard",
     body: "Applications log themselves over Supabase realtime. Track status, drafts, and sources without manual entry.",
@@ -36,6 +44,8 @@ const FEATURES = [
   {
     tint: "card-tint-secondary",
     iconTone: "bg-secondary text-white",
+    borderHover: "group-hover:border-secondary/35",
+    glow: "rgba(16,185,129,0.35)",
     icon: ChatIcon,
     title: "Cover letters on demand",
     body: "Reply yes and Kairo drafts a cover letter in-thread using the same job context. Edit and send.",
@@ -43,6 +53,8 @@ const FEATURES = [
   {
     tint: "card-tint-accent",
     iconTone: "bg-accent text-white",
+    borderHover: "group-hover:border-accent/35",
+    glow: "rgba(245,158,11,0.35)",
     icon: PluginIcon,
     title: "Sources you trust",
     body: "LinkedIn, Greenhouse, Lever, Remotive. Notion sync live. Slack and more on the way.",
@@ -73,11 +85,21 @@ const COMPARISON = [
 ] as const;
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 28, rotate: -1.2 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: EASE_KAIROS },
+    rotate: 0,
+    transition: { duration: 0.7, ease: EASE_KAIROS },
+  },
+};
+
+const rowVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: EASE_KAIROS },
   },
 };
 
@@ -125,16 +147,36 @@ export function Features() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-40px" }}
                 variants={cardVariants}
-                transition={{ delay: idx * 0.04 }}
-                className={`${feature.tint} card-interactive`}
+                transition={{ delay: idx * 0.05 }}
+                whileHover={{ y: -6 }}
+                className={`${feature.tint} group relative overflow-hidden transition-[border-color,box-shadow] duration-300 ${feature.borderHover}`}
+                style={
+                  {
+                    "--feature-glow": feature.glow,
+                  } as React.CSSProperties
+                }
+                onMouseEnter={(e) => {
+                  (
+                    e.currentTarget as HTMLElement
+                  ).style.boxShadow = `0 18px 40px -22px ${feature.glow}`;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                }}
               >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[12px] bg-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-[0.035]"
+                />
                 <div
-                  className={`flex h-10 w-10 items-center justify-center rounded-md ${feature.iconTone}`}
+                  className={`relative flex h-11 w-11 items-center justify-center rounded-md transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-6 group-hover:scale-110 ${feature.iconTone}`}
                 >
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-h3 mt-4 text-foreground">{feature.title}</h3>
-                <p className="text-body-sm mt-2 text-foreground/80">
+                <h3 className="relative text-h3 mt-4 text-foreground">
+                  {feature.title}
+                </h3>
+                <p className="relative text-body-sm mt-2 text-foreground/80">
                   {feature.body}
                 </p>
               </motion.div>
@@ -170,19 +212,22 @@ export function Features() {
               initial={initial}
               whileInView="visible"
               viewport={{ once: true, margin: "-20px" }}
-              variants={cardVariants}
-              transition={{ delay: idx * 0.03 }}
-              className="grid grid-cols-[1fr_1fr] border-b border-border last:border-b-0"
+              variants={rowVariants}
+              transition={{ delay: idx * 0.04 }}
+              whileHover={{
+                backgroundColor: "rgba(59,130,246,0.05)",
+              }}
+              className="group grid cursor-default grid-cols-[1fr_1fr] border-b border-border transition-colors last:border-b-0"
             >
               <div className="flex items-start gap-3 px-5 py-4">
-                <CrossIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                <CrossIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-muted-foreground transition-colors group-hover:text-danger/80" />
                 <p className="text-body-sm text-muted-foreground">
                   {row.typical}
                 </p>
               </div>
-              <div className="flex items-start gap-3 border-l border-border bg-primary/[0.04] px-5 py-4">
-                <CheckIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-                <p className="text-body-sm font-medium text-foreground">
+              <div className="flex items-start gap-3 border-l border-border bg-primary/[0.04] px-5 py-4 transition-colors group-hover:bg-primary/[0.09]">
+                <CheckIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary transition-colors group-hover:text-primary-hover" />
+                <p className="text-body-sm font-semibold text-foreground">
                   {row.kairos}
                 </p>
               </div>

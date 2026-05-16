@@ -71,11 +71,17 @@ export function HowItWorks() {
 
         <div className="relative mt-16">
           <div
-            className="pointer-events-none absolute left-[27px] top-2 hidden h-[calc(100%-1rem)] w-px bg-border md:block"
+            className="pointer-events-none absolute left-[35px] top-2 hidden h-[calc(100%-2rem)] w-[2px] md:block"
+            style={{
+              backgroundImage:
+                "linear-gradient(to bottom, var(--primary) 50%, transparent 0)",
+              backgroundSize: "2px 12px",
+              backgroundRepeat: "repeat-y",
+            }}
             aria-hidden
           />
 
-          <ol className="space-y-8">
+          <ol className="space-y-12 lg:space-y-14">
             {STEPS.map((step, idx) => (
               <motion.li
                 key={step.label}
@@ -83,22 +89,29 @@ export function HowItWorks() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
                 variants={itemVariants}
+                whileHover={{ x: 4 }}
                 transition={{ delay: idx * 0.05 }}
-                className="grid gap-6 md:grid-cols-[56px_1fr] md:items-start"
+                className="grid gap-6 md:grid-cols-[72px_1fr] md:items-start md:gap-8"
               >
                 <div className="flex items-center gap-3 md:block">
-                  <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-border bg-white text-h3 font-extrabold text-primary">
+                  <span
+                    className="relative z-10 flex h-[72px] w-[72px] items-center justify-center rounded-full border-2 border-primary text-h2 font-extrabold text-primary"
+                    style={{ background: "var(--primary-tint)" }}
+                  >
                     {idx + 1}
                   </span>
                 </div>
 
-                <div className="card card-interactive border-l-4 border-l-primary/60">
-                  <p className="text-label">{step.label}</p>
+                <div className="card border-l-4 border-l-primary bg-white p-7 transition-shadow duration-300 hover:[box-shadow:0_18px_40px_-24px_rgba(59,130,246,0.45)]">
+                  <p className="text-label text-primary">{step.label}</p>
                   <h3 className="text-h2 mt-2 text-foreground">{step.title}</h3>
                   <p className="text-body mt-3 text-muted-foreground">
                     {step.body}
                   </p>
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-md bg-muted px-2.5 py-1 text-caption font-medium text-foreground">
+                  <div
+                    className="mt-5 inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-caption font-semibold text-primary"
+                    style={{ background: "var(--primary-tint)" }}
+                  >
                     <span
                       className="h-1.5 w-1.5 rounded-full bg-primary"
                       aria-hidden

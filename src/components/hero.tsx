@@ -2,7 +2,12 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import Link from "next/link";
-import { WhatsAppIcon } from "./logo";
+import {
+  MoreVerticalIcon,
+  PhoneCallIcon,
+  VideoCallIcon,
+  WhatsAppIcon,
+} from "./logo";
 import { LoopingHeadlinePiece } from "./looping-headline-piece";
 
 const EASE_KAIROS = [0.16, 1, 0.3, 1] as const;
@@ -54,22 +59,19 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden border-b border-primary/20"
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(59,130,246,0.13) 0%, rgba(16,185,129,0.07) 55%, #ffffff 100%)",
-      }}
+      className="relative overflow-hidden border-b-4 border-primary-hover/60"
+      style={{ background: "var(--primary)" }}
     >
-      <div className="dot-grid pointer-events-none absolute inset-0 opacity-40" />
+      <div className="dot-grid-light pointer-events-none absolute inset-0 opacity-70" />
       <div
-        className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[860px] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
+        className="pointer-events-none absolute -top-32 left-1/2 h-[520px] w-[880px] -translate-x-1/2 rounded-full opacity-55 blur-3xl"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(59,130,246,0.35), rgba(16,185,129,0.22) 45%, transparent 70%)",
+            "radial-gradient(circle at center, rgba(255,255,255,0.32), rgba(16,185,129,0.22) 55%, transparent 75%)",
         }}
       />
 
-      <div className="relative mx-auto grid w-full max-w-6xl gap-16 px-6 pb-24 pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:pb-32 lg:pt-28">
+      <div className="relative mx-auto grid w-full max-w-6xl gap-14 px-6 pb-24 pt-20 lg:grid-cols-[1fr_1.05fr] lg:gap-10 lg:pb-32 lg:pt-28">
         <motion.div
           initial={initial}
           animate="visible"
@@ -77,16 +79,16 @@ export function Hero() {
           className="flex flex-col"
         >
           <motion.div variants={fadeUpVariants}>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1 text-label">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-label text-white backdrop-blur">
               <span
-                className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse-dot"
+                className="h-1.5 w-1.5 rounded-full bg-white animate-pulse-dot"
                 aria-hidden
               />
               WhatsApp-first AI career agent
             </span>
           </motion.div>
 
-          <h1 className="text-display mt-6 text-foreground">
+          <h1 className="text-display mt-6 text-white">
             <motion.span
               className="block"
               variants={containerVariants}
@@ -102,21 +104,19 @@ export function Hero() {
               ))}
             </motion.span>
             <motion.span
-              className="block"
+              className="block whitespace-nowrap"
               variants={containerVariants}
             >
-              {/* "Land" word with stagger entrance */}
               <motion.span
                 key="Land"
-                className="mr-[0.25em] inline-block will-change-transform"
+                className="mr-[0.18em] inline-block will-change-transform"
                 variants={wordVariants}
               >
-                Land{" "}
+                Land
               </motion.span>
-              {/* Looping piece: entrance stagger once, then cycles text ↔ typing bubble */}
               <motion.span
                 key="looping"
-                className="inline-block will-change-transform"
+                className="inline-block align-baseline will-change-transform"
                 variants={wordVariants}
               >
                 <LoopingHeadlinePiece />
@@ -126,7 +126,7 @@ export function Hero() {
 
           <motion.p
             variants={fadeUpVariants}
-            className="mt-6 max-w-xl text-body text-muted-foreground"
+            className="mt-6 max-w-xl text-body text-white/85"
           >
             Kairos is your always-on career agent. It watches the job market,
             scores listings against your profile, and pings you on WhatsApp the
@@ -138,11 +138,11 @@ export function Hero() {
             variants={fadeUpVariants}
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <Link href="#cta" className="btn btn-primary">
+            <Link href="#cta" className="btn btn-on-blue-solid">
               <WhatsAppIcon className="h-4 w-4" />
               Start with WhatsApp
             </Link>
-            <Link href="#demo" className="btn btn-outline">
+            <Link href="#demo" className="btn btn-on-blue-outline">
               See the demo
             </Link>
           </motion.div>
@@ -175,40 +175,57 @@ export function Hero() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col">
-      <span className="text-label">{label}</span>
-      <span className="text-body-sm font-semibold text-foreground">
-        {value}
-      </span>
+      <span className="text-label text-white/65">{label}</span>
+      <span className="text-body-sm font-semibold text-white">{value}</span>
     </div>
   );
 }
 
 function Divider() {
-  return <span className="h-8 w-px bg-border" aria-hidden />;
+  return <span className="h-8 w-px bg-white/20" aria-hidden />;
 }
 
 function WhatsAppPreview() {
   return (
-    <div className="relative mx-auto w-full max-w-md">
-      <div className="absolute -inset-3 -z-10 rounded-[28px] bg-gradient-to-br from-primary/15 via-transparent to-secondary/15 blur-2xl" />
-      <div className="overflow-hidden rounded-3xl border border-border bg-white">
-        <div className="flex items-center gap-3 border-b border-border bg-[#075E54] px-4 py-3 text-white">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-white">
-            <WhatsAppIcon className="h-5 w-5" />
+    <div className="relative mx-auto w-full max-w-xl">
+      <div className="absolute -inset-4 -z-10 rounded-[32px] bg-gradient-to-br from-white/30 via-transparent to-accent/30 blur-2xl" />
+      <div className="overflow-hidden rounded-[28px] border border-white/20 bg-white">
+        <div className="flex items-center gap-3 bg-[#075E54] px-5 py-4 text-white">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-white">
+            <WhatsAppIcon className="h-6 w-6" />
           </div>
           <div className="flex-1">
-            <p className="text-body-sm font-semibold leading-tight">
+            <p className="text-h4 font-semibold leading-tight">
               Kairo · Career agent
             </p>
-            <p className="text-[11px] opacity-80">online now</p>
+            <p className="text-[12px] opacity-85">online now</p>
           </div>
-          <span
-            className="h-2 w-2 rounded-full bg-secondary animate-pulse-dot"
-            aria-hidden
-          />
+          <div className="flex items-center gap-4 text-white/90">
+            <button
+              type="button"
+              className="transition-colors hover:text-white"
+              aria-label="Video call"
+            >
+              <VideoCallIcon className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              className="transition-colors hover:text-white"
+              aria-label="Voice call"
+            >
+              <PhoneCallIcon className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              className="transition-colors hover:text-white"
+              aria-label="More options"
+            >
+              <MoreVerticalIcon className="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
-        <div className="wa-wallpaper space-y-3 px-4 py-5">
+        <div className="wa-wallpaper space-y-3 px-5 py-6">
           <ChatBubble side="left">
             <div className="flex items-center gap-2 text-label">
               <span className="rounded bg-primary px-1.5 py-0.5 text-[10px] font-bold text-white tracking-wider">
@@ -272,7 +289,7 @@ function ChatBubble({
   side: "left" | "right";
 }) {
   const base =
-    "max-w-[85%] rounded-2xl px-3.5 py-2.5 text-foreground shadow-none";
+    "max-w-[85%] rounded-2xl px-4 py-3 text-foreground shadow-none";
   const left = "bg-white rounded-tl-sm";
   const right = "bg-[#DCF8C6] rounded-tr-sm ml-auto";
   return (

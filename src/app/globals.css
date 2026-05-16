@@ -241,6 +241,26 @@ body {
   background: var(--muted);
 }
 
+.btn-on-blue-solid {
+  background: #ffffff;
+  color: var(--primary);
+}
+
+.btn-on-blue-solid:hover {
+  background: #f8fafc;
+}
+
+.btn-on-blue-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 4px solid #ffffff;
+  padding: calc(0.75rem - 4px) calc(1.25rem - 4px);
+}
+
+.btn-on-blue-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Cards                                                                     */
 /* -------------------------------------------------------------------------- */
@@ -309,12 +329,28 @@ body {
   background-size: 20px 20px;
 }
 
+.dot-grid-light {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.18) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
 .gradient-text {
   background: linear-gradient(
     90deg,
     var(--primary) 0%,
     var(--secondary) 100%
   );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-on-blue {
+  background: linear-gradient(90deg, #ffffff 0%, #fde68a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

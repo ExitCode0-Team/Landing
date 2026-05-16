@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 const EASE_KAIROS = [0.16, 1, 0.3, 1] as const;
 
-// Phase durations in ms
 const TEXT_VISIBLE_MS = 1800;
 const TEXT_TRANSITION_MS = 550;
 const TYPING_VISIBLE_MS = 1600;
@@ -20,20 +19,17 @@ export function LoopingHeadlinePiece() {
   useEffect(() => {
     if (prefersReducedMotion) return;
 
-    // Initial delay to let the entrance stagger finish first
     const startDelay = setTimeout(() => {
       let current: Phase = "text";
 
       function tick() {
         if (current === "text") {
-          // Switch to typing after text has been visible + its exit animation
           setTimeout(() => {
             current = "typing";
             setPhase("typing");
             tick();
           }, TEXT_VISIBLE_MS + TEXT_TRANSITION_MS);
         } else {
-          // Switch back to text after typing has been visible + its exit animation
           setTimeout(() => {
             current = "text";
             setPhase("text");
@@ -50,17 +46,16 @@ export function LoopingHeadlinePiece() {
 
   if (prefersReducedMotion) {
     return (
-      <span className="inline-block">
-        <span className="gradient-text">more.</span>
+      <span className="inline-block align-baseline">
+        <span className="gradient-text-on-blue">more.</span>
       </span>
     );
   }
 
   return (
-    // Fixed-width container prevents layout shift between text and typing bubble
     <span
-      className="relative inline-flex items-center align-baseline"
-      style={{ minWidth: "7ch" }}
+      className="relative inline-flex items-baseline"
+      style={{ minWidth: "5.2ch", verticalAlign: "baseline" }}
       aria-live="polite"
       aria-atomic="true"
     >
@@ -68,22 +63,29 @@ export function LoopingHeadlinePiece() {
         {phase === "text" ? (
           <motion.span
             key="text"
-            className="inline-block will-change-transform"
+            className="inline-block align-baseline will-change-transform"
             initial={{ x: 64, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -64, opacity: 0 }}
-            transition={{ duration: TEXT_TRANSITION_MS / 1000, ease: EASE_KAIROS }}
+            transition={{
+              duration: TEXT_TRANSITION_MS / 1000,
+              ease: EASE_KAIROS,
+            }}
           >
-            <span className="gradient-text">more.</span>
+            <span className="gradient-text-on-blue">more.</span>
           </motion.span>
         ) : (
           <motion.span
             key="typing"
-            className="inline-flex items-center"
+            className="inline-flex items-baseline align-baseline"
             initial={{ opacity: 0, scale: 0.82 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.88 }}
-            transition={{ duration: TYPING_TRANSITION_MS / 1000, ease: EASE_KAIROS }}
+            transition={{
+              duration: TYPING_TRANSITION_MS / 1000,
+              ease: EASE_KAIROS,
+            }}
+            style={{ verticalAlign: "baseline" }}
           >
             <TypingBubble />
           </motion.span>
@@ -96,24 +98,40 @@ export function LoopingHeadlinePiece() {
 function TypingBubble() {
   return (
     <span
-      className="relative inline-flex items-center gap-[5px] rounded-2xl rounded-bl-sm px-4 py-3"
-      style={{ background: "#DCF8C6" }}
+      className="relative inline-flex items-center gap-[0.12em]"
+      style={{
+        background: "#DCF8C6",
+        borderRadius: "0.55em 0.55em 0.55em 0.18em",
+        padding: "0.32em 0.48em",
+        verticalAlign: "baseline",
+        transform: "translateY(-0.06em)",
+      }}
       aria-label="Kairo is typing"
     >
-      {/* WhatsApp bubble tail */}
-      <svg
-        className="absolute -bottom-[7px] left-0"
-        width="12"
-        height="8"
-        viewBox="0 0 12 8"
-        fill="none"
-        aria-hidden
-      >
-        <path d="M0 0 C4 8 12 8 12 8 L0 8 Z" fill="#DCF8C6" />
-      </svg>
-      <span className="typing-dot h-2 w-2 rounded-full bg-muted-foreground" />
-      <span className="typing-dot h-2 w-2 rounded-full bg-muted-foreground" />
-      <span className="typing-dot h-2 w-2 rounded-full bg-muted-foreground" />
+      <span
+        className="typing-dot rounded-full"
+        style={{
+          width: "0.2em",
+          height: "0.2em",
+          background: "#4b5563",
+        }}
+      />
+      <span
+        className="typing-dot rounded-full"
+        style={{
+          width: "0.2em",
+          height: "0.2em",
+          background: "#4b5563",
+        }}
+      />
+      <span
+        className="typing-dot rounded-full"
+        style={{
+          width: "0.2em",
+          height: "0.2em",
+          background: "#4b5563",
+        }}
+      />
     </span>
   );
 }
