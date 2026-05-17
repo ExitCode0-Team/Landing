@@ -96,7 +96,10 @@ function Navbar() {
           <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
         </nav>
         <div className="flex items-center gap-4">
-          <a href="#login" className="hidden sm:inline text-sm text-[#B6BED1] hover:text-white transition-colors">
+          <a
+            href="https://kairos-cv.netlify.app/"
+            className="hidden sm:inline text-sm text-[#B6BED1] hover:text-white transition-colors"
+          >
             Login
           </a>
           <a
